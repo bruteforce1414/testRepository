@@ -12,6 +12,6 @@ func factorial(n uint) uint {
 	if n == 0 {
 		return 1
 	}
-	//
+	//изменение в комментарии!!!
 	return n * factorial(n - 1)
 }
