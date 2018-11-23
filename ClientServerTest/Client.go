@@ -11,11 +11,9 @@ import (
 )
 
 func main() {
-
+		conn, err:= net.Dial("tcp", "127.0.0.1:4547")
 	    go func() {
     	for {
-
-		conn, err:= net.Dial("tcp", "127.0.0.1:4547")
 		    if err != nil {
 			fmt.Println(err)
 			break;
