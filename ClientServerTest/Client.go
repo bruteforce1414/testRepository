@@ -9,15 +9,21 @@ import (
 	"syscall"
 	"time"
 )
-
+var e =false;
 func main() {
-		conn, err:= net.Dial("tcp", "127.0.0.1:4547")
+
 	    go func() {
     	for {
+			conn, err:= net.Dial("tcp", "127.0.0.1:4547")
 		    if err != nil {
 			fmt.Println(err)
 			break;
 			//return
+			}
+		    if e==true{
+				fmt.Println("Программа завершится через 3 секунды")
+				time.Sleep(3 * time.Second)
+				os.Exit(0)
 			}
 				message, _ := bufio.NewReader(conn).ReadString('\n')
 				fmt.Print("Message from server: "+message)
@@ -33,10 +39,11 @@ func main() {
 
 func handleClient(sigs chan os.Signal,done chan bool) {
 	s := <-sigs // ожидание сигнала
-	fmt.Println("Программа завершится через 3 секунды. Возникшее событие:", s)
+	fmt.Println("Произошло событие:", s)
+	e=true;
 	time.Sleep(3 * time.Second)
 	done <- true
-	os.Exit(0)
+	//os.Exit(0)
 
 }
 
